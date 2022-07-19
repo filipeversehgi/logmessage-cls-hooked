@@ -1,6 +1,7 @@
 import { createNamespace, getNamespace, Namespace } from "cls-hooked";
 
 const NAMESPACE_KEY = 'LOGROOT-CLS-NAMESPACE';
+const PROP_KEY = 'LOGROOT-SETTED-PROPS';
 
 /**
  * Used to declare a Transaction operation. In order to use it, you must use {@link BaseRepository} custom repository in order to use the Transactional decorator
@@ -28,12 +29,30 @@ export const setSessionProp = (propName: string, value: any) => {
     let session = getNamespace(NAMESPACE_KEY);
     if(!session) throw '@LOG_ROOT Session is not created'
     session.set(propName, value);
+    const alreadSetProps = session.get(PROP_KEY) ?? [];
+    session.set(PROP_KEY, alreadSetProps.concat([propName]))
 }
 
-export const getSessionProps = (...sessionProps: string[]) => {
+export const addToSessionProp = (propName: string, value: any) => {
+    let session = getNamespace(NAMESPACE_KEY);
+    if(!session) throw '@LOG_ROOT Session is not created'
+    const existingValue = session.get(propName) ?? []
+    if(Array.isArray(existingValue)) {
+        session.set(propName, existingValue.concat([value]))
+    } else {
+        session.set(propName, [value])
+    }
+
+    const alreadSetProps = session.get(PROP_KEY) ?? [];
+    session.set(PROP_KEY, alreadSetProps.concat([propName]))
+
+}
+
+export const getSessionProps = () => {
     let session = getNamespace(NAMESPACE_KEY);
     if(!session) throw '@LOG_ROOT Session is not created';
     let result = new Map<string, any>();
+    const sessionProps = session.get(PROP_KEY) ?? [];
     for(const propName of sessionProps) {
         result.set(propName, session.get(propName))
     }

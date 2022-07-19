@@ -1,4 +1,4 @@
-import { getSessionProps as getLogProps, initLogMessageCls, LogRoot, setSessionProp as setLogProp } from "../src/log-root";
+import { addToSessionProp, getSessionProps as getLogProps, initLogMessageCls, LogRoot, setSessionProp as setLogProp } from "../src/log-root";
 
 initLogMessageCls();
 
@@ -7,8 +7,9 @@ class TestClass {
     @LogRoot()
     runTest() {
         setLogProp('user', 'test@gmail.com')
+        addToSessionProp('posts', 'A');
         this.subMethod();
-        console.log('T1', getLogProps('user', 'name'))
+        console.log('T1', getLogProps())
         return true;
     }
 
@@ -19,7 +20,8 @@ class TestClass {
     @LogRoot()
     runTestB() {
         setLogProp('user', 'another@gmail.com')
-        console.log('T2', getLogProps('user', 'name'))
+        addToSessionProp('posts', 'B');
+        console.log('T2', getLogProps())
         return true
     }
 
@@ -27,13 +29,14 @@ class TestClass {
     runTestC() {
         setLogProp('user', 'fulano@gmail.com')
         setLogProp('name', 'omg');
+        addToSessionProp('posts', 'C');
         this.runTestB();
-        console.log('T3', getLogProps('user', 'name'))
+        console.log('T3', getLogProps())
         return true
     }
     
     runTestD() {
-        console.log('T4', getLogProps('user', 'name'))
+        console.log('T4', getLogProps())
         return true
     }
 }
