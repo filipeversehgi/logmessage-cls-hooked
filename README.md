@@ -1,5 +1,7 @@
 # Log Message CLS Hooked
 
+[![npm version](https://badge.fury.io/js/logmessage-cls-hooked.svg)](https://badge.fury.io/js/logmessage-cls-hooked)
+
 A `LogRoot` Method Decorator that uses [cls-hooked](https://www.npmjs.com/package/cls-hooked) to handle and propagate log message details between different methods deeper in the callstack, removing the need to propagate a paremeter just for logging purposes.
 
 Inspired by [Typeorm Transactional CLS Hooked](https://github.com/odavid/typeorm-transactional-cls-hooked/)
