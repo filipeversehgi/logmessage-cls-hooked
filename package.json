@@ -1,11 +1,21 @@
 {
   "name": "logmessage-cls-hooked",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "A LogRoot Method Decorator that uses cls-hooked to handle and propagate log message details between different methods deeper in the callstack, removing the need to propagate a paremeter just for logging purposes",
+  "main": "dist/index.js",
   "license": "MIT",
+  "author": "Filipe Versehgi",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/filipeversehgi/logmessage-cls-hooked"
+  },
   "scripts": {
+    "prepublish": "tsc",
     "test": "jest test/"
   },
+  "keywords": [
+    "cls-hooked", "log", "node-csl"
+  ],
   "devDependencies": {
     "@types/jest": "^28.1.6",
     "@types/node": "^18.0.6",

@@ -1,48 +1,23 @@
-import { addToSessionProp, getSessionProps as getLogProps, initLogMessageCls, LogRoot, setSessionProp as setLogProp } from "../src/log-root";
+import { getLogData, initLogMessageCls, LogRoot, setOnLog } from "../src";
 
 initLogMessageCls();
 
 class TestClass {
 
     @LogRoot()
-    runTest() {
-        setLogProp('user', 'test@gmail.com')
-        addToSessionProp('posts', 'A');
-        this.subMethod();
-        console.log('T1', getLogProps())
-        return true;
+    pegaFaturas() {
+        setOnLog('userid', 'thiago')
+        this.getRepository();
+        console.log('Pegou as faturas', getLogData());
     }
 
-    subMethod() {
-        setLogProp('name', 'test-1234')
-    }
-
-    @LogRoot()
-    runTestB() {
-        setLogProp('user', 'another@gmail.com')
-        addToSessionProp('posts', 'B');
-        console.log('T2', getLogProps())
-        return true
-    }
-
-    @LogRoot()
-    runTestC() {
-        setLogProp('user', 'fulano@gmail.com')
-        setLogProp('name', 'omg');
-        addToSessionProp('posts', 'C');
-        this.runTestB();
-        console.log('T3', getLogProps())
-        return true
-    }
-    
-    runTestD() {
-        console.log('T4', getLogProps())
-        return true
+    // @LogRoot()
+    getRepository() {
+        const faturas = [1, 2, 3];
+        setOnLog('qtdFaturas', faturas.length);
+        console.log('Pegou as faturas', getLogData());
     }
 }
 
 const instance = new TestClass();
-instance.runTest();
-instance.runTestB();
-instance.runTestC();
-instance.runTestD();
+instance.pegaFaturas();
