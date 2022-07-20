@@ -30,7 +30,7 @@ A Log root is a context that will receive log properties from all the subsequent
 Imagine the following scenario:
 
 ```typescript
-import { getLogData, LogRoot, setOnLog } from "../src";
+import { getLogData, LogRoot, setOnLog } from "logmessage-cls-hooked";
 
 class SomeClass {
 
@@ -54,7 +54,7 @@ If you want to create a new context to add properties without making a mess in t
 
 
 ```typescript
-import { getLogData, LogRoot, setOnLog } from "../src";
+import { getLogData, LogRoot, setOnLog } from "logmessage-cls-hooked";
 
 class SomeClass {
 
