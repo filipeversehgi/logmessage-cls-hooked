@@ -8,11 +8,22 @@ import { _getSessionOrFail } from "./common";
 export function LogRoot(): MethodDecorator {
   return (target: any, methodName: string | symbol, descriptor: TypedPropertyDescriptor<any>) => {
     const originalMethod = descriptor.value
-    const session = _getSessionOrFail()
-    descriptor.value = function PropertyDescriptor(...args: any[]) {
-        return session.runAndReturn(() => {
-            originalMethod.apply(this, args)
+    const isAsync = originalMethod.constructor.name === 'AsyncFunction';
+    if(isAsync) {
+      descriptor.value = async function PropertyDescriptor(...args: any[]) {
+        const session = _getSessionOrFail()
+        return session.runAndReturn(async () => {
+          const result = await originalMethod.apply(this, args)
+          return result 
         })
+      }
+    } else {
+      descriptor.value = function PropertyDescriptor(...args: any[]) {
+        const session = _getSessionOrFail()
+        return session.runAndReturn(() => {
+          return originalMethod.apply(this, args)
+        })
+      }
     }
   }
 }

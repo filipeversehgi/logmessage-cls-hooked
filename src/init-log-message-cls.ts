@@ -1,4 +1,4 @@
-import { createNamespace } from "cls-hooked";
+import { createNamespace, getNamespace } from "cls-hooked";
 import { NAMESPACE_KEY } from "./constants";
 
 /**
@@ -7,6 +7,6 @@ import { NAMESPACE_KEY } from "./constants";
  * contexts to work properly
  */
  export const initLogMessageCls =  () => {
-    createNamespace(NAMESPACE_KEY);
+    return getNamespace(NAMESPACE_KEY) || createNamespace(NAMESPACE_KEY)
 }
 

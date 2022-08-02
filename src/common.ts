@@ -3,7 +3,7 @@ import { NAMESPACE_KEY, PROP_KEY } from "./constants";
 
 export const _getSessionOrFail = () => {
     let session = getNamespace(NAMESPACE_KEY);
-    if(!session) throw '@LOG_ROOT Session is not created'
+    if(!session) throw new Error('@LOG_ROOT Session is not created')
     return session;
 }
 
