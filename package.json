@@ -1,6 +1,6 @@
 {
   "name": "logmessage-cls-hooked",
-  "version": "1.1.2",
+  "version": "1.1.5",
   "description": "A LogRoot Method Decorator that uses cls-hooked to handle and propagate log message details between different methods deeper in the callstack, removing the need to propagate a paremeter just for logging purposes",
   "main": "dist/index.js",
   "license": "MIT",
